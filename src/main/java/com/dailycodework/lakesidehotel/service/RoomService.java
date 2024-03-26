@@ -37,4 +37,14 @@ public class RoomService implements IRoomService{
     public List<String> getAllRoomTypes(){
         return roomRepository.findDistrictRoomTypes();
     }
+
+    @Override
+    public List<Room> getAllRooms() {
+        return roomRepository.findAll();
+    }
+
+    @Override
+    public byte[] getRoomPhotoByRoomId(Long id) {
+        return new byte[0];
+    }
 }
