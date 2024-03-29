@@ -16,4 +16,14 @@ public class BookingService implements IBookingService{
     public List<BookedRoom> getAllBookingsByRoomId(Long roomId) {
         return bookingRepository.findByRoomId(roomId);
     }
+
+    @Override
+    public List<BookedRoom> getAllBookings() {
+        return null;
+    }
+
+    @Override
+    public BookedRoom findByBookingByConfirmationCode(String confirmationCode) {
+        return null;
+    }
 }

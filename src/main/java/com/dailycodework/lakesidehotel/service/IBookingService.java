@@ -10,4 +10,6 @@ public interface IBookingService {
     List<BookedRoom> getAllBookingsByRoomId(Long roomId);
 
     List<BookedRoom> getAllBookings();
+
+    BookedRoom findByBookingByConfirmationCode(String confirmationCode);
 }
