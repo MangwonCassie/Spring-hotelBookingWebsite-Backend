@@ -12,4 +12,6 @@ public interface IBookingService {
     List<BookedRoom> getAllBookings();
 
     BookedRoom findByBookingByConfirmationCode(String confirmationCode);
+
+    String saveBooking(Long roomId, BookedRoom bookingRequest);
 }

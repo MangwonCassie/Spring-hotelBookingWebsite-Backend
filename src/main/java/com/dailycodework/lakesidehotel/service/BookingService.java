@@ -26,4 +26,9 @@ public class BookingService implements IBookingService{
     public BookedRoom findByBookingByConfirmationCode(String confirmationCode) {
         return null;
     }
+
+    @Override
+    public String saveBooking(Long roomId, BookedRoom bookingRequest) {
+        return "null";
+    }
 }
