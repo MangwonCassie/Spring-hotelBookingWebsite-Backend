@@ -14,4 +14,6 @@ public interface IBookingService {
     BookedRoom findByBookingByConfirmationCode(String confirmationCode);
 
     String saveBooking(Long roomId, BookedRoom bookingRequest);
+
+    void cancelBooking(Long bookingId);
 }

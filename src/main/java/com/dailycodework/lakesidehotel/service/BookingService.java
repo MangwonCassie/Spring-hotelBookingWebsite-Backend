@@ -31,4 +31,9 @@ public class BookingService implements IBookingService{
     public String saveBooking(Long roomId, BookedRoom bookingRequest) {
         return "null";
     }
+
+    @Override
+    public void cancelBooking(Long bookingId) {
+
+    }
 }
