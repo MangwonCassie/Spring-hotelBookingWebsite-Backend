@@ -1,5 +1,6 @@
 package com.dailycodework.lakesidehotel.service;
 
+import com.dailycodework.lakesidehotel.exception.ResourceNotFoundException;
 import com.dailycodework.lakesidehotel.model.BookedRoom;
 import com.dailycodework.lakesidehotel.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +20,13 @@ public class BookingService implements IBookingService{
 
     @Override
     public List<BookedRoom> getAllBookings() {
-        return null;
+        return bookingRepository.findAll();
     }
 
     @Override
     public BookedRoom findByBookingByConfirmationCode(String confirmationCode) {
-        return null;
+        return bookingRepository.findByBookingConfirmationCode(confirmationCode)
+                .orElseThrow(() -> new ResourceNotFoundException("No booking found with booking code :"+confirmationCode));
     }
 
     @Override
