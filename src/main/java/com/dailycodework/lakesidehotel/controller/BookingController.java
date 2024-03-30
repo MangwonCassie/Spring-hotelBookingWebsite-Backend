@@ -3,8 +3,11 @@ package com.dailycodework.lakesidehotel.controller;
 import com.dailycodework.lakesidehotel.exception.InvalidBookingRequestException;
 import com.dailycodework.lakesidehotel.exception.ResourceNotFoundException;
 import com.dailycodework.lakesidehotel.model.BookedRoom;
+import com.dailycodework.lakesidehotel.model.Room;
 import com.dailycodework.lakesidehotel.response.BookingResponse;
+import com.dailycodework.lakesidehotel.response.RoomResponse;
 import com.dailycodework.lakesidehotel.service.IBookingService;
+import com.dailycodework.lakesidehotel.service.IRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,7 @@ import java.util.List;
 public class BookingController {
 
     private final IBookingService bookingService;
+    private final IRoomService roomService; //for BookingResponse
 
     @GetMapping("all-bookings")
     public ResponseEntity<List<BookingResponse>> getAllBookings() {
@@ -33,10 +37,6 @@ public class BookingController {
         return ResponseEntity.ok(bookingResponses);
     }
 
-
-    private BookingResponse getBookingResponse(BookedRoom booking) {
-        return null;
-    }
 
     @GetMapping("/confirmation/{confirmationCode}")
     public ResponseEntity<?> getBookingByConfirmationCode(@PathVariable String confirmationCode) {
@@ -63,5 +63,19 @@ public class BookingController {
     @DeleteMapping("/booking/{bookingId}/delete")
     public void cancelBooking(@PathVariable Long bookingId){
         bookingService.cancelBooking(bookingId);
+    }
+
+    public BookingResponse getBookingResponse (BookedRoom booking) {
+        Room theRoom = roomService.getRoomById(booking.getRoom().getId()).get();
+        RoomResponse roomResponse = new RoomResponse(
+                theRoom.getId(),
+                theRoom.getRoomType(),
+                theRoom.getRoomPrice()); //photo 필요 x
+        return new BookingResponse(
+                booking.getBookingId(), booking.getCheckInDate(),
+                booking.getCheckOutDate(),booking.getGuestFullName(),
+                booking.getGuestEmail(), booking.getNumOfAdults(),
+                booking.getNumOfChildren(), booking.getTotalNumOfGuest(),
+                booking.getBookingConfirmationCode(), roomResponse); //생성자 추가됨
     }
 }
