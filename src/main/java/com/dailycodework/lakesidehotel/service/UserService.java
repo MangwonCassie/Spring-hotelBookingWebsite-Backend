@@ -1,10 +1,20 @@
 package com.dailycodework.lakesidehotel.service;
 
 import com.dailycodework.lakesidehotel.model.User;
+import com.dailycodework.lakesidehotel.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class UserService implements IUserService {
+
+    private final UserRepository userRepository;
+
+
+
     @Override
     public User registerUser(User user) {
         return null;
