@@ -1,6 +1,7 @@
 package com.dailycodework.lakesidehotel.service;
 
 import com.dailycodework.lakesidehotel.exception.UserAlreadyExistsException;
+import com.dailycodework.lakesidehotel.model.Role;
 import com.dailycodework.lakesidehotel.model.User;
 import com.dailycodework.lakesidehotel.repository.RoleRepository;
 
@@ -28,6 +29,9 @@ public class UserService implements IUserService {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new UserAlreadyExistsException(user.getEmail() + "already exists");
         }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Role userRole = roleRepository.findByName("ROLE_USER");
         return null;
     }
 
