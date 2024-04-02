@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -31,8 +32,9 @@ public class UserService implements IUserService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Role userRole = roleRepository.findByName("ROLE_USER");
-        return null;
+        Role userRole = roleRepository.findByName("ROLE_USER").get();
+        user.setRoles(Collections.singletonList(userRole));
+        return userRepository.save(user);
     }
 
     @Override
