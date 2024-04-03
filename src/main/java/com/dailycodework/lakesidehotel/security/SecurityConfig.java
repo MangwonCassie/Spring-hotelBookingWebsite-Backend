@@ -1,4 +1,4 @@
-package com.dailycodework.lakesidehotel.controller.security;
+package com.dailycodework.lakesidehotel.security;
 
 
 import org.springframework.context.annotation.Bean;
