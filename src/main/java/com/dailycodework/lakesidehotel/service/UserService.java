@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
@@ -39,11 +40,14 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> getUsers() {
-        return null;
+        return userRepository.findAll();
     }
 
+
+    @Transactional
     @Override
     public void DeleteUser(String email) {
+        userRepository.deleteByEmail(email);
 
     }
 
