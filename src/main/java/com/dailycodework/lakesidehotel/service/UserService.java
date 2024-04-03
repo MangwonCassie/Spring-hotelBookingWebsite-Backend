@@ -48,8 +48,11 @@ public class UserService implements IUserService {
     @Transactional
     @Override
     public void deleteUser(String email) {
-        userRepository.deleteByEmail(email);
-
+        //이미 getUser()메소드 만들었으니까 써먹을 수 있음
+        User theUser = getUser(email);
+        if(theUser != null ) {
+            userRepository.deleteByEmail(email);
+        }
     }
 
     @Override
