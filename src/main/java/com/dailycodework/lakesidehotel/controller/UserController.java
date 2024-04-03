@@ -22,20 +22,32 @@ public class UserController {
     private final IUserService userService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getUsers(){
+    public ResponseEntity<List<User>> getUsers() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.FOUND);
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<?> getUserByEmail(@PathVariable("email") String email){
-       try {
-           User theUser = userService.getUser(email);
-           return ResponseEntity.ok(theUser);
-       } catch (UsernameNotFoundException e){
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-       } catch (Exception e){
-           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching user");
-       }
+    public ResponseEntity<?> getUserByEmail(@PathVariable("email") String email) {
+        try {
+            User theUser = userService.getUser(email);
+            return ResponseEntity.ok(theUser);
+        } catch (UsernameNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching user");
+        }
     }
+
+    public ResponseEntity<String> deleteUser(@PathVariable("email") String email) {
+        try {
+            userService.deleteUser(email);
+            return ResponseEntity.ok("User is deleted successfully");
+        } catch (UsernameNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting user");
+        }
+    }
+
 
 }

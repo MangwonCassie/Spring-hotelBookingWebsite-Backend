@@ -8,7 +8,8 @@ public interface IUserService {
 
     User registerUser(User user);
     List<User> getUsers();
-    void DeleteUser(String email);
+    void deleteUser(String email);
     User getUser(String email);
+
 
 }
