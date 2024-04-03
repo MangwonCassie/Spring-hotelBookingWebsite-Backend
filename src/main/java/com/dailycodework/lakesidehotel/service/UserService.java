@@ -8,6 +8,7 @@ import com.dailycodework.lakesidehotel.repository.RoleRepository;
 import com.dailycodework.lakesidehotel.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +54,6 @@ public class UserService implements IUserService {
 
     @Override
     public User getUser(String email) {
-        return null;
+        return userRepository.findByEmail(email).orElseThrow(()-> new UsernameNotFoundException("user is not found"));
     }
 }
