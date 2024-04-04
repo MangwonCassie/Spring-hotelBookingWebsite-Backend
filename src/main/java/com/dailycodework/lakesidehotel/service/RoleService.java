@@ -1,5 +1,6 @@
 package com.dailycodework.lakesidehotel.service;
 
+import com.dailycodework.lakesidehotel.exception.RoleAlreadyExistException;
 import com.dailycodework.lakesidehotel.model.Role;
 import com.dailycodework.lakesidehotel.model.User;
 import com.dailycodework.lakesidehotel.repository.RoleRepository;
@@ -11,18 +12,24 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RoleService implements IRoleService{
+public class RoleService implements IRoleService {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
 
     @Override
     public List<Role> getRoles() {
-        return null;
+        return roleRepository.findAll();
     }
 
     @Override
     public Role createRole(Role theRole) {
-        return null;
+        String roleName = "ROLE_" + theRole.getName().toUpperCase();
+        Role role = new Role(roleName); // 이미 one argument 있는 생성자 Role에 있음
+
+        if (roleRepository.existsByName(role)) {
+            throw new RoleAlreadyExistException(theRole.getName() + "role already exists");
+        }
+        return roleRepository.save(role);
     }
 
     @Override
