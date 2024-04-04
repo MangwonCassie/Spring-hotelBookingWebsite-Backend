@@ -6,9 +6,7 @@ import com.dailycodework.lakesidehotel.service.IRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,8 +29,12 @@ public class RoleController {
             return ResponseEntity.ok("New role created successfully");
         } catch (RoleAlreadyExistException re) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(re.getMessage());
-
-
         }
+    }
+
+    @DeleteMapping("/delete/{roleId}")
+    public void deleteRole(@PathVariable("roleId") Long roldId){
+        roleService.deleteRole(roldId);
+
     }
 }
