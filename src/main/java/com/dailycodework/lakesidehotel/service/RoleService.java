@@ -1,6 +1,7 @@
 package com.dailycodework.lakesidehotel.service;
 
 import com.dailycodework.lakesidehotel.exception.RoleAlreadyExistException;
+import com.dailycodework.lakesidehotel.exception.UserAlreadyExistsException;
 import com.dailycodework.lakesidehotel.model.Role;
 import com.dailycodework.lakesidehotel.model.User;
 import com.dailycodework.lakesidehotel.repository.RoleRepository;
@@ -61,7 +62,19 @@ public class RoleService implements IRoleService {
 
     @Override
     public User assignRoleToUser(Long userId, Long roleId) {
-        return null;
+        Optional<User> user = userRepository.findById(userId);
+        Optional<Role> role = roleRepository.findById(roleId);
+
+        if (role.isPresent() && role.get().getUsers().contains(role.get())) {
+          throw new UserAlreadyExistsException(
+                  user.get().getFirstName()+"is already assigned to" + role.get().getName()+"role");
+        }
+
+        if(role.isPresent()){
+            role.get().assignRoleToUser(user.get());
+            roleRepository.save(role.get());
+        }
+        return user.get();
     }
 
     @Override
