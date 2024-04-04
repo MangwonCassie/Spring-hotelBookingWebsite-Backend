@@ -35,6 +35,10 @@ public class RoleController {
     @DeleteMapping("/delete/{roleId}")
     public void deleteRole(@PathVariable("roleId") Long roldId){
         roleService.deleteRole(roldId);
+    }
 
+    @PostMapping("/remove-all-users-from-role/{roleId}")
+    public Role removeAllUsersFromRole(@PathVariable("roleId") Long roldId){
+        return roleService.removeAllUsersFromRole(roldId);
     }
 }
