@@ -29,13 +29,13 @@ public class JwtUtils {
     @Value("${security.jwt.jwtExpirationTime}")
     private int jwtExprirationTime;
 
-    public String generateTokenForUser(Authentication authentication){
+    public String generateTokenForUser(Authentication authentication) {
         HotelUserDetails userPriciple = (HotelUserDetails) authentication.getPrincipal(); //casting
         List<String> roles = userPriciple.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
         return Jwts.builder().setSubject(userPriciple.getUsername())
                 .claim("roles", roles)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime()+jwtExprirationTime))
+                .setExpiration(new Date((new Date()).getTime() + jwtExprirationTime))
                 .signWith(key(), SignatureAlgorithm.HS256).compact();
     }
 
@@ -43,13 +43,21 @@ public class JwtUtils {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
-    private String getUserNameFromToken(String token){
+    private String getUserNameFromToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key())
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(key()).build().parse(token);
+        } catch (Exception e) {
+            logger.error("No  claims found : {} ", e.getMessage()); //추후 디테일하게 에러로그 잡기
+        }
     }
 
 }
