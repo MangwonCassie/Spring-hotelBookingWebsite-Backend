@@ -55,10 +55,10 @@ public class JwtUtils {
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key()).build().parse(token);
+            return true;
         } catch (Exception e) {
             logger.error("No  claims found : {} ", e.getMessage()); //추후 디테일하게 에러로그 잡기
         }
+        return false;
     }
-
 }
-
