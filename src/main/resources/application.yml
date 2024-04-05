@@ -34,7 +34,3 @@ logging:
   level:
     org.springframework.security.web: DEBUG
 
-security:
-  jwt:
-    expirationTime: 3600000000
-    secret: "3472893798238028402398409238409328403284093284902348"

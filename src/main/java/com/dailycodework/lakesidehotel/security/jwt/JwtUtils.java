@@ -13,21 +13,25 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class JwtUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${security.jwt.secret}")
+
+    @Value("${auth.token.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${security.jwt.jwtExpirationTime}")
-    private int jwtExprirationTime;
+    @Value("${auth.token.expirationInMils}")
+    private int jwtExpirationMs;
+
 
     public String generateTokenForUser(Authentication authentication) {
         HotelUserDetails userPriciple = (HotelUserDetails) authentication.getPrincipal(); //casting
@@ -35,7 +39,7 @@ public class JwtUtils {
         return Jwts.builder().setSubject(userPriciple.getUsername())
                 .claim("roles", roles)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExprirationTime))
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(key(), SignatureAlgorithm.HS256).compact();
     }
 
@@ -43,7 +47,7 @@ public class JwtUtils {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
-    private String getUserNameFromToken(String token) {
+    String getUserNameFromToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key())
                 .build()
