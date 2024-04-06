@@ -28,7 +28,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String jwt = parseJwt(request);
+        String jwt = takeJwtFromClient(request);
         try {
             if (jwt != null && jwtUtils.validateToken(jwt)) {
                 String email = jwtUtils.getUserNameFromToken(jwt);
@@ -44,7 +44,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String parseJwt(HttpServletRequest request) {
+    private String takeJwtFromClient(HttpServletRequest request) {
         return null;
     }
 
