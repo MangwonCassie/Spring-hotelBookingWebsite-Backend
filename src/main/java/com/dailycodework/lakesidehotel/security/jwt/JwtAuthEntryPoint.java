@@ -18,10 +18,11 @@ import java.util.Map;
 @Component
 public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
 
-    private static final Logger logeer = LoggerFactory.getLogger(JwtAuthEntryPoint.class);
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthEntryPoint.class);
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
 
+            logger.error("Unauthorized error: {}", authException.getMessage());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 

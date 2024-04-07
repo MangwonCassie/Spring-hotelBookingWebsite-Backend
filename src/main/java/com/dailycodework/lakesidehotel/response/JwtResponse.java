@@ -6,8 +6,9 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
+
 @NoArgsConstructor
-public class jwtResponse {
+public class JwtResponse {
 
     private Long id;
     private String email;
