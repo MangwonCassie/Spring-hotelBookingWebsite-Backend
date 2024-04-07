@@ -19,11 +19,12 @@ import static org.springframework.http.HttpStatus.FOUND;
 public class RoleController {
 
     private final IRoleService roleService;
-
+    @GetMapping("/all-roles")
     public ResponseEntity<List<Role>> getRoles() {
         return new ResponseEntity<List<Role>>(roleService.getRoles(), FOUND);
     }
 
+    @PostMapping("/create-new-role")
     public ResponseEntity<String> createRole(@RequestBody Role theRole) {
         try {
             roleService.createRole(theRole);
