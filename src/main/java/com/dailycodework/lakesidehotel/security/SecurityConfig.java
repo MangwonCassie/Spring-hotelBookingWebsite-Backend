@@ -58,7 +58,7 @@ public class SecurityConfig {
                         exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/rooms/**","/bookings/**", "/roles/**", "/auth/**")
+                        .requestMatchers( "/api/**", "/rooms/**","/bookings/**", "/roles/**", "/auth/**")
                         .permitAll()
                         .anyRequest().authenticated()
                 );

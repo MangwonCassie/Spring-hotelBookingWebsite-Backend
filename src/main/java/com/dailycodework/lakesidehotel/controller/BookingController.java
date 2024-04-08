@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @RequiredArgsConstructor
-@RequestMapping("/bookings")
+@RequestMapping("api/bookings")
 @RestController
 public class BookingController {
 

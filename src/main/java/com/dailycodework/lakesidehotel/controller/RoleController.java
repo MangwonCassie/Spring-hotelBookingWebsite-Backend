@@ -14,7 +14,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.FOUND;
 
 @RestController
-@RequestMapping("/roles")
+@RequestMapping("api/roles")
 @RequiredArgsConstructor
 public class RoleController {
 
