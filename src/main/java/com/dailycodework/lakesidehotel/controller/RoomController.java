@@ -25,9 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/rooms")
+@RequestMapping("/rooms")
 public class RoomController {
     private final IRoomService roomService;
     private final BookingService bookingService;
@@ -61,6 +62,7 @@ public class RoomController {
                 roomResponses.add(roomResponse);
             }
         }
+
         return ResponseEntity.ok(roomResponses);
     }
 

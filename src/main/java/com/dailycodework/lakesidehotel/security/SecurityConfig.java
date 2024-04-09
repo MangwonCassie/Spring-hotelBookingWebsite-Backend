@@ -58,8 +58,8 @@ public class SecurityConfig {
                         exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/api/**", "/rooms/**","/bookings/**", "/roles/**", "/auth/**")
-                        .permitAll()
+                        .requestMatchers( "/api/**", "/rooms/**","/bookings/**", "/auth/**")
+                        .permitAll().requestMatchers("/roles/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 );
         http.authenticationProvider(authenticationProvider());
