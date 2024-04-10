@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*")
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rooms")
@@ -44,11 +44,13 @@ public class RoomController {
         return ResponseEntity.ok(response);
     }
 
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5173/", "http://127.0.0.1:5173/", "http://127.0.0.1:5173"})
     @GetMapping("/room/types")
     public  List<String> getRoomType(){
         return roomService.getAllRoomTypes();
     }
 
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5173/", "http://127.0.0.1:5173/", "http://127.0.0.1:5173"})
     @GetMapping("/all-rooms")
     public ResponseEntity<List<RoomResponse>> getAllRooms() throws SQLException {
         List<Room> rooms = roomService.getAllRooms();

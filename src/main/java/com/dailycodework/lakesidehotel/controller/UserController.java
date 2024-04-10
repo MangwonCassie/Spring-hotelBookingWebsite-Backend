@@ -18,6 +18,7 @@ public class UserController {
 
     private final IUserService userService;
 
+    @CrossOrigin(origins = "http://127.0.0.1:5173")
     @GetMapping("/all")
     public ResponseEntity<List<User>> getUsers() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.FOUND);
