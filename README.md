@@ -38,7 +38,7 @@
 - ![error2](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/a464de3d-a3c5-448f-bcc7-619451bb7f4a)
 
 <br>
-- <h4>🛠MVC용으로 CorsConfig 클래스에 정의된 addCorsMapping 메소드 외 추가로 SecurityConfig에 addCorsMappin g별도로 추가 (경로 설정 시 * 와일드 카드 사용 불가)</h4><br>
+- 🛠MVC용으로 CorsConfig 클래스에 정의된 addCorsMapping 메소드 외 추가로 SecurityConfig에 addCorsMappin g별도로 추가 (경로 설정 시 * 와일드 카드 사용 불가)<br>
 - CorsConfig 클래스의 addCorsMapping method<br>
 
 
