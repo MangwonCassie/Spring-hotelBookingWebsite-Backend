@@ -98,6 +98,10 @@ Hibernate: update room set is_booked=?,photo=?,room_price=?,room_type=? where id
     }
 ```
 
+<br>
+- profile탭에서 예약한 내용이 있지만 나타나지 않는 증상<br>
+
+![profile error](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/e30b93ca-97f7-4ea1-b025-412d16861845)
 
 
 
