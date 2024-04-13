@@ -75,6 +75,11 @@
 ![booking3](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/b3addf20-a402-4f45-a747-764311cecb33)
 
 - adult가 0 기본값으로 설정되는 문제
+- Hibernate: select r1_0.id,r1_0.is_booked,r1_0.photo,r1_0.room_price,r1_0.room_type from room r1_0 where r1_0.id=?
+Hibernate: select b1_0.room_id,b1_0.booking_id,b1_0.adults,b1_0.children,b1_0.confirmation_code,b1_0.check_in,b1_0.check_out,b1_0.guest_email,b1_0.guest_full_name,b1_0.total_guest from booked_room b1_0 where b1_0.room_id=?
+Hibernate: insert into booked_room (adults,children,confirmation_code,check_in,check_out,guest_email,guest_full_name,room_id,total_guest) values (?,?,?,?,?,?,?,?,?)
+Hibernate: update room set is_booked=?,photo=?,room_price=?,room_type=? where id=?
+
 
 <h3>🔸서버 배포 과정</h3><br>
 업데이트 예정
