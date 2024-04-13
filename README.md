@@ -139,6 +139,14 @@ export const getHeader = () => {
 ```
 
 
+<br>
+- 프로필에서 booking 현황을 확인할 수 있게 처리.
+
+![book error solved](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/9b11f3e4-96a9-43bf-a615-4098dddef536)
+
+
+
+
 <h3>🔸서버 배포 과정</h3><br>
 업데이트 예정
 
