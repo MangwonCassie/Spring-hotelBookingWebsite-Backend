@@ -21,13 +21,15 @@ public class BookingResponse {
 
     private String guestEmail;
 
-    private int numOfAdults;
+    private int adults;
 
-    private int numOfChildren;
+    private int children;
 
-    private int totalNumOfGuests;
+    private int total_guest;
 
     private String bookingConfirmationCode;
+
+    private RoomResponse room;
 
 
     public BookingResponse(Long id, LocalDate checkInDate, LocalDate checkOutDate, String bookingConfirmationCode) {
@@ -37,6 +39,4 @@ public class BookingResponse {
         this.bookingConfirmationCode = bookingConfirmationCode;
     }
 
-    public BookingResponse(Long bookingId, LocalDate checkInDate, LocalDate checkOutDate, String guestFullName, String guestEmail, int numOfAdults, int numOfChildren, int totalNumOfGuest, String bookingConfirmationCode, RoomResponse roomResponse) {
-    }
 }

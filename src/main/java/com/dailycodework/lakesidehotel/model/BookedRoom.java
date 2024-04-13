@@ -49,16 +49,16 @@ public class BookedRoom {
     private Room room;
 
     public void calculateTotalNumberOfGuest(){
-        this.totalNumOfGuest = this.NumOfAdults + this.NumOfChildren;
-
+        this.totalNumOfGuest = this.NumOfAdults + this.NumOfChildren; //클래스 내부 값 찾아서 매개변수 필요x
     }
 
     public void setNumOfAdults(int numOfAdults) {
+        this.NumOfAdults =  numOfAdults;
         calculateTotalNumberOfGuest();
     }
 
     public void setNumOfChildren(int numOfChildren) {
-        NumOfChildren = numOfChildren;
+        this.NumOfChildren = numOfChildren;
         calculateTotalNumberOfGuest();
     }
 
