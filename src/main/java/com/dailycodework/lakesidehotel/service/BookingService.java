@@ -1,7 +1,9 @@
 package com.dailycodework.lakesidehotel.service;
 
+import com.dailycodework.lakesidehotel.exception.InvalidBookingRequestException;
 import com.dailycodework.lakesidehotel.exception.ResourceNotFoundException;
 import com.dailycodework.lakesidehotel.model.BookedRoom;
+import com.dailycodework.lakesidehotel.model.Room;
 import com.dailycodework.lakesidehotel.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookingService implements IBookingService{
     private final BookingRepository bookingRepository;
+    private final IRoomService roomService;
 
     @Override
     public List<BookedRoom> getAllBookingsByRoomId(Long roomId) {
@@ -31,11 +34,29 @@ public class BookingService implements IBookingService{
 
     @Override
     public String saveBooking(Long roomId, BookedRoom bookingRequest) {
-        return "null";
+        if (bookingRequest.getCheckOutDate().isBefore(bookingRequest.getCheckInDate())){
+            throw new InvalidBookingRequestException("Check-in date must come before check-out date");
+        }
+        Room room = roomService.getRoomById(roomId).get();
+        List<BookedRoom> existingBookings = room.getBookings();
+        boolean roomIsAvailable = roomIsAvailable(bookingRequest,existingBookings);
+        if (roomIsAvailable){
+            room.addBooking(bookingRequest);
+            bookingRepository.save(bookingRequest);
+        }else{
+            throw  new InvalidBookingRequestException("Sorry, This room is not available for the selected dates;");
+        }
+        return bookingRequest.getBookingConfirmationCode();
     }
+
 
     @Override
     public void cancelBooking(Long bookingId) {
+        bookingRepository.deleteById(bookingId);
+    }
 
+
+    private boolean roomIsAvailable(BookedRoom bookingRequest, List<BookedRoom> existingBookings) {
+        return false;
     }
 }
