@@ -104,6 +104,40 @@ Hibernate: update room set is_booked=?,photo=?,room_price=?,room_type=? where id
 ![profile error](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/e30b93ca-97f7-4ea1-b025-412d16861845)
 
 
+<br>
+
+- frontend에서 요청보낼 때, cors 에러 방지 에러와 인증을 위한 token를 header에 설정해준다.
+
+```import axios from "axios"
+
+export const api = axios.create({
+	baseURL: "http://localhost:9192",
+	headers: {"Access-Control-Allow-Origin": "*"}
+})
+
+export const getHeader = () => {
+	const token = localStorage.getItem("token")
+	console.log("Token:", token) // Add this line to log the token
+	return {
+		Authorization: `Bearer ${token}`,
+		"Content-Type": "application/json"
+	}
+}
+```
+- @Entity 어노테이션 붙여진 JPA 엔티티임을 나타내는 BookedRoom에서 guestEmail 필드를 사용하여 예약을 찾음.
+
+``` @GetMapping("/user/{email}/bookings")
+    public ResponseEntity<List<BookingResponse>> getBookingsByUserEmail(@PathVariable String email) {
+        List<BookedRoom> bookings = bookingService.getBookingsByUserEmail(email);
+        List<BookingResponse> bookingResponses = new ArrayList<>();
+        for (BookedRoom booking : bookings) {
+            BookingResponse bookingResponse = getBookingResponse(booking);
+            bookingResponses.add(bookingResponse);
+        }
+        return ResponseEntity.ok(bookingResponses);
+    }
+```
+
 
 <h3>🔸서버 배포 과정</h3><br>
 업데이트 예정
