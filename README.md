@@ -126,7 +126,9 @@ export const getHeader = () => {
 
 
 <br>
-- header에 token, userId, userRole 처리
+- localstorage의 header에 token, userId, userRole 저장
+![token의 userId, token, userRole](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/531b2154-70af-430a-8732-b2bc51c66a18)
+
 
 
 ```
