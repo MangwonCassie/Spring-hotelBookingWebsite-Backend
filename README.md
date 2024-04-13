@@ -123,6 +123,12 @@ export const getHeader = () => {
 		"Content-Type": "application/json"
 	}
 }
+
+
+<br>
+- header에 token, userId, userRole 처리
+
+
 ```
 - @Entity 어노테이션 붙여진 JPA 엔티티임을 나타내는 BookedRoom에서 guestEmail 필드를 사용하여 예약을 찾음.
 
