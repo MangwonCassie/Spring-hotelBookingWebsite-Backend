@@ -70,6 +70,12 @@
 ```
 <br>
 
+![booking1](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/c8a00ac3-580f-4d3b-8bf0-d647991f0f07)
+![booking2](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/1cbb6226-8322-4ca9-a404-256b83f0af6d)
+![booking3](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/b3addf20-a402-4f45-a747-764311cecb33)
+
+- adult가 0 기본값으로 설정되는 문제
+
 <h3>🔸서버 배포 과정</h3><br>
 업데이트 예정
 
