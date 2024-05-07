@@ -155,6 +155,25 @@ export const getHeader = () => {
 
 
 <h3>🔸서버 배포 과정</h3><br>
-업데이트 예정
+- Winscp로 ec2 배포한 인스턴스 연결 <br>
+<br>
 
+```
+sudo su // 관리자 권한
+apt-get update // 패키지 관리자 업데이트  
+apt-get install mysql-server // mysql 설치
+```
+
+<br>
+- sql 파일 export할 때 ansi 인코딩 되있을수도 있으므로, 메모장 다른이름으로 저장할 때 인코딩 방식 etf-8로 변경해야함<br>
+- winscp에서 ec2 컴퓨터로 sql파일 업로드 하기  <br>
+- mysql -u root -p <br>
+- ALTER USER 'root'@'localhost' IDENTIFIED BY '12341234';  <br>
+- (ALTER 전에 SELECT user, plugin FROM mysql.user WHERE user = 'root'; 했었을 때 root 사용자 (혹은 사용하는 사용자)가 mysql_native_password로 설정되어있어야함)<br>
+- exit (mysql 나감) <br>
+- mysql -u root -p < Dump20240507-utf.sql <br>
+- SHOW DATABASES;  <br>
+- use 쓰려는 데이터베이스명 <br>
+- SHOW TABLES  <br>
+- SELECT * FROM booked_room; <br>
 
