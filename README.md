@@ -155,7 +155,8 @@ export const getHeader = () => {
 
 
 <h3>🔸서버 배포 과정</h3><br>
-- Winscp로 ec2 배포한 인스턴스 연결 <br>
+
+- Winscp로 ec2 배포한 인스턴스 연결 후 mysql 설치 <br>
 <br>
 
 ```
@@ -179,6 +180,7 @@ apt-get install mysql-server // mysql 설치
 
 	
  <h3>🔸ec2에 설치된 mysql과 로컬 mysql workbench 연결하기 </h3> <br>
+ 
 
 - EC2에 인바운드 설정에도 3306 포트에 대한 문을 열어준다.
 
@@ -192,7 +194,7 @@ SELECT host, user, authentication_string FROM mysql.user;   //(authentication_st
 
 ![ec2-2](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/d58ee66e-f5ff-4745-9421-bb050015105e)<br>
 
-host가 원격으로 접속할 수 있는 test 사용자를 만들어야 접속가능하다. 현재 로컬에만 가능한 사용자만 있는 상태 <br>
+**host가 원격으로 접속할 수 있는 test 사용자를 만들어야 접속가능하다. 현재 로컬에만 가능한 사용자만 있는 상태 <br>
 
 ```
 
