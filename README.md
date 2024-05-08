@@ -175,5 +175,40 @@ apt-get install mysql-server // mysql 설치
 - SHOW DATABASES;  <br>
 - use 쓰려는 데이터베이스명 <br>
 - SHOW TABLES  <br>
-- SELECT * FROM booked_room; <br>
+- SELECT * FROM booked_room; <br><br>
+
+	
+ <h3>🔸ec2에 설치된 mysql과 로컬 mysql workbench 연결하기 </h3> <br>
+
+- EC2에 인바운드 설정에도 3306 포트에 대한 문을 열어준다.
+
+![ec2-1](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/860c6476-07d4-496d-b49a-5746d6c4b08e)
+
+- mysql -u root -p // winscp 에 로그인 후 mysql 접속 <br>
+
+```
+SELECT host, user, authentication_string FROM mysql.user;   //(authentication_string은 password 같은 개념)  <br>
+````
+
+![ec2-2](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/d58ee66e-f5ff-4745-9421-bb050015105e)<br>
+
+host가 원격으로 접속할 수 있는 test 사용자를 만들어야 접속가능하다. 현재 로컬에만 가능한 사용자만 있는 상태 <br>
+
+```
+
+CREATE USER 'test'@'%' IDENTIFIED BY '12341234';
+
+GRANT ALL PRIVILEGES ON *.* TO 'test'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+```
+
+
+
+![ec2](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Backend/assets/129250487/68f86611-5612-4df8-9660-2429bad829ec)
+
+
+
+
+
 
