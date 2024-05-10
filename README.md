@@ -211,6 +211,16 @@ FLUSH PRIVILEGES;
 
 
 
+<br>
+-EC2에 배포한 MYSQL 과 연결할 때 반드시 인텔리제이에서 application.properties or yml 파일 설정 넣어두고 "build" 꼭 해서 설정 빌드파일에 적용한 뒤 연결이 가능하다. <br>
+
+```
+spring.datasource.url=jdbc:mysql://77.777.77.77/lakeside_hotel_db?serverTimezone=UTC&characterEncoding=UTF-8
+spring.datasource.username=test
+spring.datasource.password=*********
+```
+
+
 
 
 
