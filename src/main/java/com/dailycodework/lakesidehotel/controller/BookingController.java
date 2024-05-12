@@ -11,13 +11,17 @@ import com.dailycodework.lakesidehotel.service.IRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+<<<<<<< HEAD
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
+=======
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 /**
  * @author Simpson Alfred
  */
@@ -35,12 +39,30 @@ public class BookingController {
         List<BookedRoom> bookings = bookingService.getAllBookings();
         List<BookingResponse> bookingResponses = new ArrayList<>();
         for (BookedRoom booking : bookings){
+=======
+
+@RequiredArgsConstructor
+@RequestMapping("/bookings")
+@RestController
+public class BookingController {
+
+    private final IBookingService bookingService;
+    private final IRoomService roomService; //for BookingResponse
+
+    @GetMapping("all-bookings")
+    public ResponseEntity<List<BookingResponse>> getAllBookings() {
+        List<BookedRoom> bookings = bookingService.getAllBookings();
+        List<BookingResponse> bookingResponses = new ArrayList<>();
+
+        for (BookedRoom booking : bookings) {
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
             BookingResponse bookingResponse = getBookingResponse(booking);
             bookingResponses.add(bookingResponse);
         }
         return ResponseEntity.ok(bookingResponses);
     }
 
+<<<<<<< HEAD
     @PostMapping("/room/{roomId}/booking")
     public ResponseEntity<?> saveBooking(@PathVariable Long roomId,
                                          @RequestBody BookedRoom bookingRequest){
@@ -62,6 +84,29 @@ public class BookingController {
             return ResponseEntity.ok(bookingResponse);
         }catch (ResourceNotFoundException ex){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+=======
+
+    @GetMapping("/confirmation/{confirmationCode}")
+    public ResponseEntity<?> getBookingByConfirmationCode(@PathVariable String confirmationCode) {
+        try {
+            BookedRoom booking = bookingService.findByBookingByConfirmationCode(confirmationCode);
+            BookingResponse bookingResponse = getBookingResponse(booking);
+            return ResponseEntity.ok(bookingResponse);
+        } catch (ResourceNotFoundException ex) {
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+            // "NOT FOUND" 상태 코드와 예외 메시지를 반환
+        }
+    }
+
+
+    @PostMapping("/room/{roomId}/booking")
+    public ResponseEntity<?> saveBooking(@PathVariable Long roomId, @RequestBody BookedRoom bookingRequest){
+        try {
+            String confirmationCode = bookingService.saveBooking(roomId, bookingRequest);
+            return ResponseEntity.ok("Room booked successfully, Your booking confirmation code is :"+confirmationCode);
+        }catch(InvalidBookingRequestException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
         }
     }
 
@@ -81,17 +126,30 @@ public class BookingController {
         bookingService.cancelBooking(bookingId);
     }
 
+<<<<<<< HEAD
     private BookingResponse getBookingResponse(BookedRoom booking) {
         Room theRoom = roomService.getRoomById(booking.getRoom().getId()).get();
         RoomResponse room = new RoomResponse(
                 theRoom.getId(),
                 theRoom.getRoomType(),
                 theRoom.getRoomPrice());
+=======
+    public BookingResponse getBookingResponse (BookedRoom booking) {
+        Room theRoom = roomService.getRoomById(booking.getRoom().getId()).get();
+        RoomResponse roomResponse = new RoomResponse(
+                theRoom.getId(),
+                theRoom.getRoomType(),
+                theRoom.getRoomPrice()); //photo 필요 x
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
         return new BookingResponse(
                 booking.getBookingId(), booking.getCheckInDate(),
                 booking.getCheckOutDate(),booking.getGuestFullName(),
                 booking.getGuestEmail(), booking.getNumOfAdults(),
                 booking.getNumOfChildren(), booking.getTotalNumOfGuest(),
+<<<<<<< HEAD
                 booking.getBookingConfirmationCode(), room);
+=======
+                booking.getBookingConfirmationCode(), roomResponse); //생성자 추가됨
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     }
 }

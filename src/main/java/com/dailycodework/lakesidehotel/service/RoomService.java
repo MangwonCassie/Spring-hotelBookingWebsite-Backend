@@ -10,11 +10,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
+<<<<<<< HEAD
+=======
+import java.lang.module.ResolutionException;
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Optional;
 
 /**
@@ -33,14 +38,39 @@ public class RoomService implements IRoomService {
         if (!file.isEmpty()){
             byte[] photoBytes = file.getBytes();
             Blob photoBlob = new SerialBlob(photoBytes);
+=======
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+public class RoomService implements IRoomService{
+
+    private final RoomRepository roomRepository;
+
+    @Override
+    public Room addNewRoom(MultipartFile file, String roomType, BigDecimal roomPrice) throws IOException, SQLException {
+        Room room = new Room();
+        room.setRoomType(roomType);
+        room.setRoomPrice(roomPrice);
+        if(!file.isEmpty()){
+            byte[] photoBytes = file.getBytes();
+            Blob photoBlob = new SerialBlob(photoBytes
+            );
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
             room.setPhoto(photoBlob);
         }
         return roomRepository.save(room);
     }
 
     @Override
+<<<<<<< HEAD
     public List<String> getAllRoomTypes() {
         return roomRepository.findDistinctRoomTypes();
+=======
+    public List<String> getAllRoomTypes(){
+        return roomRepository.findDistrictRoomTypes();
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     }
 
     @Override
@@ -51,10 +81,18 @@ public class RoomService implements IRoomService {
     @Override
     public byte[] getRoomPhotoByRoomId(Long roomId) throws SQLException {
         Optional<Room> theRoom = roomRepository.findById(roomId);
+<<<<<<< HEAD
         if(theRoom.isEmpty()){
             throw new ResourceNotFoundException("Sorry, Room not found!");
         }
         Blob photoBlob = theRoom.get().getPhoto();
+=======
+        if(theRoom.isEmpty()) {
+            throw new IllegalStateException("Sorry, Room not found!");
+        }
+        Blob photoBlob = theRoom.get().getPhoto();
+
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
         if(photoBlob != null){
             return photoBlob.getBytes(1, (int) photoBlob.length());
         }
@@ -62,6 +100,7 @@ public class RoomService implements IRoomService {
     }
 
     @Override
+<<<<<<< HEAD
     public void deleteRoom(Long roomId) {
         Optional<Room> theRoom = roomRepository.findById(roomId);
         if(theRoom.isPresent()){
@@ -72,6 +111,11 @@ public class RoomService implements IRoomService {
     @Override
     public Room updateRoom(Long roomId, String roomType, BigDecimal roomPrice, byte[] photoBytes) {
         Room room = roomRepository.findById(roomId).get();
+=======
+    public Room updateRoom(Long roomId, String roomType, BigDecimal roomPrice, byte[] photoBytes) {
+
+        Room room = roomRepository.findById(roomId).orElseThrow(() -> new ResourceNotFoundException("룸이 없습니다."));
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
         if (roomType != null) room.setRoomType(roomType);
         if (roomPrice != null) room.setRoomPrice(roomPrice);
         if (photoBytes != null && photoBytes.length > 0) {
@@ -81,7 +125,11 @@ public class RoomService implements IRoomService {
                 throw new InternalServerException("Fail updating room");
             }
         }
+<<<<<<< HEAD
        return roomRepository.save(room);
+=======
+        return roomRepository.save(room);
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     }
 
     @Override
@@ -91,6 +139,10 @@ public class RoomService implements IRoomService {
 
     @Override
     public List<Room> getAvailableRooms(LocalDate checkInDate, LocalDate checkOutDate, String roomType) {
+<<<<<<< HEAD
         return roomRepository.findAvailableRoomsByDatesAndType(checkInDate, checkOutDate, roomType);
+=======
+        return null;
+>>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     }
 }
