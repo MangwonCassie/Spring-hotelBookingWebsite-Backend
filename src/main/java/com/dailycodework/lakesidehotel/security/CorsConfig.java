@@ -38,18 +38,18 @@ public class CorsConfig {
                 HttpMethod.DELETE.name()));
         config.setMaxAge(MAX_AGE);
         source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter());
         bean.setOrder(CORS_FILTER_ORDER);
         return bean;
     }
 
-        @Override
-        public void addCorsMappings(CorsRegistry registry) {
-            registry.addMapping("/**")
-                    .allowedOrigins("http://localhost:9192", "http://127.0.0.1:5173/","http://127.0.0.1:5173")
-                    .allowedMethods("GET", "POST", "PUT", "DELETE")
-                    .allowedHeaders("Authorization", "Content-Type", "Accept")
-                    .maxAge(MAX_AGE);
+
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:9192", "http://127.0.0.1:5173/","http://127.0.0.1:5173")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("Authorization", "Content-Type", "Accept")
+                .maxAge(MAX_AGE);
         }
     }
 
