@@ -23,10 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * @author Simpson Alfred
- */
-
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -51,9 +47,6 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest request){
 
-    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest request){
-
-        }
         Authentication authentication =
                 authenticationManager
                         .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));

@@ -57,21 +57,16 @@ public class RoomService implements IRoomService{
             byte[] photoBytes = file.getBytes();
             Blob photoBlob = new SerialBlob(photoBytes
             );
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
             room.setPhoto(photoBlob);
         }
         return roomRepository.save(room);
     }
 
     @Override
-<<<<<<< HEAD
+
     public List<String> getAllRoomTypes() {
         return roomRepository.findDistinctRoomTypes();
-=======
-    public List<String> getAllRoomTypes(){
-        return roomRepository.findDistrictRoomTypes();
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
-    }
+
 
     @Override
     public List<Room> getAllRooms() {
@@ -81,18 +76,15 @@ public class RoomService implements IRoomService{
     @Override
     public byte[] getRoomPhotoByRoomId(Long roomId) throws SQLException {
         Optional<Room> theRoom = roomRepository.findById(roomId);
-<<<<<<< HEAD
         if(theRoom.isEmpty()){
             throw new ResourceNotFoundException("Sorry, Room not found!");
         }
         Blob photoBlob = theRoom.get().getPhoto();
-=======
         if(theRoom.isEmpty()) {
             throw new IllegalStateException("Sorry, Room not found!");
         }
         Blob photoBlob = theRoom.get().getPhoto();
 
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
         if(photoBlob != null){
             return photoBlob.getBytes(1, (int) photoBlob.length());
         }
@@ -100,7 +92,6 @@ public class RoomService implements IRoomService{
     }
 
     @Override
-<<<<<<< HEAD
     public void deleteRoom(Long roomId) {
         Optional<Room> theRoom = roomRepository.findById(roomId);
         if(theRoom.isPresent()){

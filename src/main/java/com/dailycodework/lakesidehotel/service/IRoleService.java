@@ -5,16 +5,9 @@ import com.dailycodework.lakesidehotel.model.User;
 
 import java.util.List;
 
-<<<<<<< HEAD
-/**
- * @author Simpson Alfred
- */
 
 public interface IRoleService {
-=======
-public interface IRoleService {
 
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     List<Role> getRoles();
     Role createRole(Role theRole);
 

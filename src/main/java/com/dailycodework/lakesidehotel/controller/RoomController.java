@@ -1,9 +1,5 @@
 package com.dailycodework.lakesidehotel.controller;
-
-<<<<<<< HEAD
 import com.dailycodework.lakesidehotel.exception.PhotoRetrievalException;
-=======
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
 import com.dailycodework.lakesidehotel.exception.ResourceNotFoundException;
 import com.dailycodework.lakesidehotel.model.BookedRoom;
 import com.dailycodework.lakesidehotel.model.Room;
@@ -11,20 +7,17 @@ import com.dailycodework.lakesidehotel.response.BookingResponse;
 import com.dailycodework.lakesidehotel.response.RoomResponse;
 import com.dailycodework.lakesidehotel.service.BookingService;
 import com.dailycodework.lakesidehotel.service.IRoomService;
-<<<<<<< HEAD
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-=======
 import com.dailycodework.lakesidehotel.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,12 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-<<<<<<< HEAD
-/**
- * @author Simpson Alfred
- */
-=======
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
 
 @RestController
 @RequiredArgsConstructor
@@ -53,10 +40,7 @@ public class RoomController {
     private final BookingService bookingService;
 
     @PostMapping("/add/new-room")
-<<<<<<< HEAD
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-=======
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     public ResponseEntity<RoomResponse> addNewRoom(
             @RequestParam("photo") MultipartFile photo,
             @RequestParam("roomType") String roomType,
@@ -67,13 +51,6 @@ public class RoomController {
         return ResponseEntity.ok(response);
     }
 
-<<<<<<< HEAD
-    @GetMapping("/room/types")
-    public List<String> getRoomTypes() {
-        return roomService.getAllRoomTypes();
-    }
-
-=======
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5173/", "http://127.0.0.1:5173/", "http://127.0.0.1:5173"})
     @GetMapping("/room/types")
     public  List<String> getRoomType(){
@@ -81,7 +58,6 @@ public class RoomController {
     }
 
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5173/", "http://127.0.0.1:5173/", "http://127.0.0.1:5173"})
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     @GetMapping("/all-rooms")
     public ResponseEntity<List<RoomResponse>> getAllRooms() throws SQLException {
         List<Room> rooms = roomService.getAllRooms();
@@ -95,7 +71,6 @@ public class RoomController {
                 roomResponses.add(roomResponse);
             }
         }
-<<<<<<< HEAD
         return ResponseEntity.ok(roomResponses);
     }
     @DeleteMapping("/delete/room/{roomId}")
@@ -111,7 +86,6 @@ public class RoomController {
                                                    @RequestParam(required = false)  String roomType,
                                                    @RequestParam(required = false) BigDecimal roomPrice,
                                                    @RequestParam(required = false) MultipartFile photo) throws SQLException, IOException {
-=======
 
         return ResponseEntity.ok(roomResponses);
     }
@@ -146,7 +120,6 @@ public class RoomController {
                                                    @RequestParam(required = false) String roomType,
                                                    @RequestParam(required = false) BigDecimal roomPrice,
                                                    @RequestParam(required = false) MultipartFile photo) throws IOException, SQLException {
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
         byte[] photoBytes = photo != null && !photo.isEmpty() ?
                 photo.getBytes() : roomService.getRoomPhotoByRoomId(roomId);
         Blob photoBlob = photoBytes != null && photoBytes.length >0 ? new SerialBlob(photoBytes): null;
@@ -165,7 +138,6 @@ public class RoomController {
         }).orElseThrow(() -> new ResourceNotFoundException("Room not found"));
     }
 
-<<<<<<< HEAD
     @GetMapping("/available-rooms")
     public ResponseEntity<List<RoomResponse>> getAvailableRooms(
             @RequestParam("checkInDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate checkInDate,
@@ -182,31 +154,6 @@ public class RoomController {
                 roomResponses.add(roomResponse);
             }
         }
-=======
-    public ResponseEntity<List<RoomResponse>> getAvailableRooms(   @RequestParam("checkInDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate checkInDate,
-                                                                   @RequestParam("checkOutDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate checkOutDate,
-                                                                   @RequestParam("roomType") String roomType) throws SQLException {
-        List<Room> availableRooms = roomService.getAvailableRooms(checkInDate, checkOutDate, roomType);
-        List<RoomResponse> roomResponses = new ArrayList<>();
-
-        for (Room room : availableRooms){
-            byte[] photoBytes = roomService.getRoomPhotoByRoomId(room.getId());
-            if(photoBytes != null && photoBytes.length>0){
-                String photoBase64 = Base64.encodeBase64String(photoBytes);
-                RoomResponse roomResponse = getRoomResponse(room);
-            }
-        }
-
-
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
-        if(roomResponses.isEmpty()){
-            return ResponseEntity.noContent().build();
-        }else{
-            return ResponseEntity.ok(roomResponses);
-        }
-    }
-
-<<<<<<< HEAD
 
 
 
@@ -236,6 +183,4 @@ public class RoomController {
 
     }
 
-=======
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
 }

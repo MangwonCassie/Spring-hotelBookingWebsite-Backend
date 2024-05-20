@@ -9,27 +9,14 @@ import lombok.Setter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-<<<<<<< HEAD
 
-/**
- * @author Simpson Alfred
- */
-=======
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class Role {
-<<<<<<< HEAD
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-=======
-
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     private Long id;
     private String name;
 
@@ -61,8 +48,5 @@ public class Role {
     public  String getName(){
         return name != null? name : "";
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8

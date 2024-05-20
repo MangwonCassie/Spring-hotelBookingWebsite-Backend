@@ -11,31 +11,17 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-/**
- * @author Simpson Alfred
- */
-=======
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 public class Room {
-<<<<<<< HEAD
-=======
-
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
     private String roomType;
     private BigDecimal roomPrice;
     private boolean isBooked = false;
-<<<<<<< HEAD
-=======
-
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     @Lob
     private Blob photo;
 
@@ -45,19 +31,11 @@ public class Room {
     public Room() {
         this.bookings = new ArrayList<>();
     }
-<<<<<<< HEAD
-    public void addBooking(BookedRoom booking){
-        if (bookings == null){
-            bookings = new ArrayList<>();
-        }
-=======
 
     public void addBooking(BookedRoom booking) {
         if (bookings == null) {
             bookings = new ArrayList<>();
         }
-
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
         bookings.add(booking);
         booking.setRoom(this);
         isBooked = true;
