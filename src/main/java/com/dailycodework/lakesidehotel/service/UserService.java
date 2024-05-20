@@ -4,14 +4,12 @@ import com.dailycodework.lakesidehotel.exception.UserAlreadyExistsException;
 import com.dailycodework.lakesidehotel.model.Role;
 import com.dailycodework.lakesidehotel.model.User;
 import com.dailycodework.lakesidehotel.repository.RoleRepository;
-<<<<<<< HEAD
 import com.dailycodework.lakesidehotel.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-=======
 
 import com.dailycodework.lakesidehotel.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +17,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
 
 import java.util.Collections;
 import java.util.List;
 
-<<<<<<< HEAD
 /**
  * @author Simpson Alfred
  */
@@ -33,17 +28,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService implements IUserService {
-=======
-@Service
-@RequiredArgsConstructor
-public class UserService implements IUserService {
 
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
 
-<<<<<<< HEAD
     @Override
     public User registerUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())){
@@ -52,7 +41,6 @@ public class UserService implements IUserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         System.out.println(user.getPassword());
         Role userRole = roleRepository.findByName("ROLE_USER").get();
-=======
 
 
     @Override
@@ -64,7 +52,6 @@ public class UserService implements IUserService {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Role userRole = roleRepository.findByName("ROLE_ADMIN").get();
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
         user.setRoles(Collections.singletonList(userRole));
         return userRepository.save(user);
     }
@@ -74,7 +61,6 @@ public class UserService implements IUserService {
         return userRepository.findAll();
     }
 
-<<<<<<< HEAD
     @Transactional
     @Override
     public void deleteUser(String email) {
@@ -83,7 +69,6 @@ public class UserService implements IUserService {
             userRepository.deleteByEmail(email);
         }
 
-=======
 
     @Transactional
     @Override
@@ -93,16 +78,12 @@ public class UserService implements IUserService {
         if(theUser != null ) {
             userRepository.deleteByEmail(email);
         }
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     }
 
     @Override
     public User getUser(String email) {
-<<<<<<< HEAD
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-=======
         return userRepository.findByEmail(email).orElseThrow(()-> new UsernameNotFoundException("user is not found"));
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     }
 }

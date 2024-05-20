@@ -10,10 +10,6 @@ import com.dailycodework.lakesidehotel.service.IUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-<<<<<<< HEAD
-import org.springframework.http.HttpStatusCode;
-=======
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,29 +23,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-<<<<<<< HEAD
-
 /**
  * @author Simpson Alfred
  */
-=======
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-<<<<<<< HEAD
-=======
 
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     private final IUserService userService;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
     @PostMapping("/register-user")
     public ResponseEntity<?> registerUser(@RequestBody User user){
         try{
@@ -62,20 +49,18 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-<<<<<<< HEAD
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest request){
-=======
+
     public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest request){
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
+
+        }
         Authentication authentication =
                 authenticationManager
                         .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-<<<<<<< HEAD
         String jwt = jwtUtils.generateJwtTokenForUser(authentication);
-=======
-        String jwt = jwtUtils.generateTokenForUser(authentication);
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
+
+
         HotelUserDetails userDetails = (HotelUserDetails) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities()
                 .stream()
@@ -86,10 +71,5 @@ public class AuthController {
                 jwt,
                 roles));
     }
-<<<<<<< HEAD
-=======
 
-
-
->>>>>>> f2a4376f1d3c4315c72d88de4738086adcb61fa8
 }
