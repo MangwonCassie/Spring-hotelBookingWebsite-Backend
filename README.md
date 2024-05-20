@@ -2,7 +2,8 @@
 <h3>📌📎 [프로젝트 # HOTEL BOOKING WEBSITE])</h3>
 [FRONT-END GITHUB ADDRESS]([https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Front/blob/master/README.m](https://github.com/MangwonCassie/Spring-hotelBookingWebsite-Front)d)
 <br>
-- You can find the history for adding functions for front side if you click the link above.
+- You can find the history for adding functions for front side if you click the link above. <br>
+-프로젝트명: D:\personal\lakeSide-hotel-demo-server-master-cassie\lakeSide-hotel-demo-server-master-cassie <br>
 
 참여 인원 : 1명
 개발 기간: 24.02~ING
