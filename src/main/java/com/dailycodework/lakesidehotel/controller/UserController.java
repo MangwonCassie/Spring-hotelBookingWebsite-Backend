@@ -25,7 +25,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.FOUND);
     }
 
-    @CrossOrigin(origins = "https://spring-hotel-booking-website-front.vercel.app/")
+    @CrossOrigin(origins = {"https://spring-hotel-booking-website-front.vercel.app/", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app"})
     @GetMapping("/{email}")
     public ResponseEntity<?> getUserByEmail(@PathVariable("email") String email) {
         try {
@@ -38,7 +38,7 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins = "https://spring-hotel-booking-website-front.vercel.app/")
+    @CrossOrigin(origins = {"https://spring-hotel-booking-website-front.vercel.app/", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app"})
     @DeleteMapping("/delete/{userId}")
     public ResponseEntity<String> deleteUser(@PathVariable("userId") String email) {
         try {

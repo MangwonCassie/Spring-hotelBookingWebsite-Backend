@@ -77,7 +77,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://127.0.0.1:5173", "https://spring-hotel-booking-website-front.vercel.app","https://spring-hotel-booking-website-front.vercel.app/" )
+                .allowedOrigins("http://127.0.0.1:5173", "https://spring-hotel-booking-website-front.vercel.app","https://spring-hotel-booking-website-front.vercel.app/", "https://spring-hotel-booking-website-front-ah6ujo8mv-yeoouls-projects.vercel.app/", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/"  )
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true)
