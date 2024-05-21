@@ -223,6 +223,10 @@ spring.datasource.username=test
 spring.datasource.password=*********
 ```
 
+<br>
+기타 정리 사항<br>
+- csrf.disable() rest api에서는 CSRF보안이 필요없기 때문에 비활성화하는 로직입니다. CSRF는 Cross Site Request Forgery의 줄임말로 사이트간 요청 위조를 의미합니다. <br>
+사용자가 자신의 의지와 무관하게 웹애플리케이션을 대상으로 공격자가 의도한 행동을 함으로써 특정페이지의 보안을 취약하게한다거나 수정, 삭제등의 작업을 하는 공격방법입니다.  <br>
 
 
 
