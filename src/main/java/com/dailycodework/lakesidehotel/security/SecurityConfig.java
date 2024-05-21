@@ -62,7 +62,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**", "/api/**", "/rooms/**", "/bookings/**", "/auth/**")
+                        .requestMatchers( "/api/**", "/rooms/**", "/bookings/**", "/auth/**")
                         .permitAll()
                         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                         .requestMatchers("/roles/**").hasRole("ADMIN")
@@ -77,7 +77,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://127.0.0.1:5173", "https://spring-hotel-booking-website-front.vercel.app")
+                .allowedOrigins("http://127.0.0.1:5173", "https://spring-hotel-booking-website-front.vercel.app","https://spring-hotel-booking-website-front.vercel.app/" )
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true)

@@ -27,6 +27,7 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOrigin("https://spring-hotel-booking-website-front.vercel.app");
+        config.addAllowedOrigin("https://spring-hotel-booking-website-front.vercel.app/");
         config.setAllowedHeaders(Arrays.asList(
                 HttpHeaders.AUTHORIZATION,
                 HttpHeaders.CONTENT_TYPE,
