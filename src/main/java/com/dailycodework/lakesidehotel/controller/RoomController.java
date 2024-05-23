@@ -39,6 +39,7 @@ public class RoomController {
     private final IRoomService roomService;
     private final BookingService bookingService;
 
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5173/", "http://127.0.0.1:5173/", "http://127.0.0.1:5173", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app","https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/", "https://spring-hotel-booking-website-front.vercel.app"})
     @PostMapping("/add/new-room")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<RoomResponse> addNewRoom(

@@ -19,6 +19,7 @@ public class UserController {
 
     private final IUserService userService;
 
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5173/", "http://127.0.0.1:5173/", "http://127.0.0.1:5173", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app","https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/", "https://spring-hotel-booking-website-front.vercel.app"})
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<User>> getUsers(){
