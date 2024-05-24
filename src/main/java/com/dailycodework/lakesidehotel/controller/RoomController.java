@@ -64,6 +64,8 @@ public class RoomController {
         List<Room> rooms = roomService.getAllRooms();
         List<RoomResponse> roomResponses = new ArrayList<>();
         for (Room room : rooms) {
+            // 로그 추가: room 정보 확인
+            System.out.println("Room ID: " + room.getId());
             byte[] photoBytes = roomService.getRoomPhotoByRoomId(room.getId());
             if (photoBytes != null && photoBytes.length > 0) {
                 String base64Photo = Base64.encodeBase64String(photoBytes);
