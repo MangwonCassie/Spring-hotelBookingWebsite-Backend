@@ -49,8 +49,8 @@ public class CorsConfig {
 
 
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**")
-                .allowedOrigins("http://localhost:9192", "http://127.0.0.1:5173/","http://127.0.0.1:5173","https://spring-hotel-booking-website-front.vercel.app", "https://spring-hotel-booking-website-front.vercel.app/", "https://spring-hotel-booking-website-front-ah6ujo8mv-yeoouls-projects.vercel.app", "https://spring-hotel-booking-website-front-ah6ujo8mv-yeoouls-projects.vercel.app/")
+        registry.addMapping("/**")
+                .allowedOrigins("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Authorization", "Content-Type", "Accept")
                 .maxAge(MAX_AGE);
