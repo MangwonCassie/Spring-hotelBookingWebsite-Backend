@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebMvc
-public class CorsConfig {
+public class CorsConfig implements WebMvcConfigurer {
 
     private static final Long MAX_AGE = 3600L;
     private static final int CORS_FILTER_ORDER = -102;
@@ -48,9 +48,10 @@ public class CorsConfig {
 //    }
 
 
+    @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOrigins("*", "https://spring-hotel-booking-website-front-9dlbj6olo-yeoouls-projects.vercel.app", "http://localhost:5173", "http://127.0.0.1:5173", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app", "https://spring-hotel-booking-website-front.vercel.app")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Authorization", "Content-Type", "Accept")
                 .maxAge(MAX_AGE);
