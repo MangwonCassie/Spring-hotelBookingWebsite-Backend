@@ -34,7 +34,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/rooms")
+@RequestMapping("/rooms")
 public class RoomController {
     private final IRoomService roomService;
     private final BookingService bookingService;
