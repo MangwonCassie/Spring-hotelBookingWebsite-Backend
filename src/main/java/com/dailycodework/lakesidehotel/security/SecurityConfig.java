@@ -88,11 +88,11 @@ public class SecurityConfig implements WebMvcConfigurer {
                         exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/api/**", "/rooms/**", "/bookings/**", "/auth/**", "/login")
+                        .requestMatchers( "/api/**", "/rooms/**", "/bookings/**", "/auth/**", "/login", "users")
                         .permitAll()
                         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                         .requestMatchers("/roles/**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                        .anyRequest().authenticated() //모든 요청이 인증되어야 한다는 것을 의미
                 );
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
