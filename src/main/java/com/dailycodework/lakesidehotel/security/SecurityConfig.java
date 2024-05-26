@@ -88,7 +88,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/api/**", "/rooms/**", "/bookings/**", "/auth/**", "/login", "users")
+                        .requestMatchers( "/api/**", "/rooms/**", "/bookings/**", "/auth/**", "/login", "/users")
                         .permitAll()
                         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                         .requestMatchers("/roles/**").hasRole("ADMIN")
