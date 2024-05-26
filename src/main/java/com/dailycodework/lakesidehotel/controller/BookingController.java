@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -67,6 +68,7 @@ public class BookingController {
         }
     }
 
+
     @CrossOrigin(origins = {"https://spring-hotel-booking-website-front-9dlbj6olo-yeoouls-projects.vercel.app", "http://localhost:5173/", "http://127.0.0.1:5173/", "http://127.0.0.1:5173", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app","https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/", "https://spring-hotel-booking-website-front.vercel.app"})
     @GetMapping("/user/{email}/bookings")
     public ResponseEntity<List<BookingResponse>> getBookingsByUserEmail(@PathVariable String email) {
@@ -86,16 +88,22 @@ public class BookingController {
     }
 
     private BookingResponse getBookingResponse(BookedRoom booking) {
-        Room theRoom = roomService.getRoomById(booking.getRoom().getId()).get();
-        RoomResponse room = new RoomResponse(
-                theRoom.getId(),
-                theRoom.getRoomType(),
-                theRoom.getRoomPrice());//photo 필요 x
-        return new BookingResponse(
-                booking.getBookingId(), booking.getCheckInDate(),
-                booking.getCheckOutDate(),booking.getGuestFullName(),
-                booking.getGuestEmail(), booking.getNumOfAdults(),
-                booking.getNumOfChildren(), booking.getTotalNumOfGuest(),
-                booking.getBookingConfirmationCode(), room);
+        Optional<Room> roomOptional = roomService.getRoomById(booking.getRoom().getId());
+        if (roomOptional.isPresent()) {
+            Room theRoom = roomOptional.get();
+            RoomResponse room = new RoomResponse(
+                    theRoom.getId(),
+                    theRoom.getRoomType(),
+                    theRoom.getRoomPrice());//photo 필요 x
+            return new BookingResponse(
+                    booking.getBookingId(), booking.getCheckInDate(),
+                    booking.getCheckOutDate(), booking.getGuestFullName(),
+                    booking.getGuestEmail(), booking.getNumOfAdults(),
+                    booking.getNumOfChildren(), booking.getTotalNumOfGuest(),
+                    booking.getBookingConfirmationCode(), room);
+        } else {
+            // 처리할 방이 없을 경우의 코드 작성
+            return null;
+        }
     }
 }

@@ -45,11 +45,11 @@ public class BookedRoom {
     @Column(name = "confirmation_Code")
     private String bookingConfirmationCode;
 
-    @Column(name = "latitude") // 위도
-    private double latitude;
-
-    @Column(name = "longitude") // 경도
-    private double longitude;
+//    @Column(name = "latitude") // 위도
+//    private double latitude;
+//
+//    @Column(name = "longitude") // 경도
+//    private double longitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
