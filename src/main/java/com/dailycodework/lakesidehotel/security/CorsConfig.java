@@ -21,31 +21,31 @@ public class CorsConfig implements WebMvcConfigurer {
     private static final Long MAX_AGE = 3600L;
     private static final int CORS_FILTER_ORDER = -102;
 
-    @Bean
-    public FilterRegistrationBean corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
-        config.addAllowedOrigin("https://spring-hotel-booking-website-front.vercel.app");
-        config.addAllowedOrigin("https://spring-hotel-booking-website-front.vercel.app/");
-        config.addAllowedOrigin( "https://spring-hotel-booking-website-front-ah6ujo8mv-yeoouls-projects.vercel.app/");
-        config.addAllowedOrigin( "https://spring-hotel-booking-website-front-ah6ujo8mv-yeoouls-projects.vercel.app");
-        config.setAllowedHeaders(Arrays.asList(
-                HttpHeaders.AUTHORIZATION,
-                HttpHeaders.CONTENT_TYPE,
-                HttpHeaders.ACCEPT));
-        config.setAllowedMethods(Arrays.asList(
-                HttpMethod.GET.name(),
-                HttpMethod.POST.name(),
-                HttpMethod.PUT.name(),
-                HttpMethod.DELETE.name()));
-        config.setMaxAge(MAX_AGE);
-        source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-        bean.setOrder(CORS_FILTER_ORDER);
-        return bean;
-    }
+//    @Bean
+//    public FilterRegistrationBean corsFilter() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.addAllowedOrigin("*");
+//        config.addAllowedOrigin("https://spring-hotel-booking-website-front.vercel.app");
+//        config.addAllowedOrigin("https://spring-hotel-booking-website-front.vercel.app/");
+//        config.addAllowedOrigin( "https://spring-hotel-booking-website-front-ah6ujo8mv-yeoouls-projects.vercel.app/");
+//        config.addAllowedOrigin( "https://spring-hotel-booking-website-front-ah6ujo8mv-yeoouls-projects.vercel.app");
+//        config.setAllowedHeaders(Arrays.asList(
+//                HttpHeaders.AUTHORIZATION,
+//                HttpHeaders.CONTENT_TYPE,
+//                HttpHeaders.ACCEPT));
+//        config.setAllowedMethods(Arrays.asList(
+//                HttpMethod.GET.name(),
+//                HttpMethod.POST.name(),
+//                HttpMethod.PUT.name(),
+//                HttpMethod.DELETE.name()));
+//        config.setMaxAge(MAX_AGE);
+//        source.registerCorsConfiguration("/**", config);
+//        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+//        bean.setOrder(CORS_FILTER_ORDER);
+//        return bean;
+//    }
 
 
     @Override
