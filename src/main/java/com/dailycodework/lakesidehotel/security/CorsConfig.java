@@ -51,10 +51,10 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app") // 모든 출처 허용안된다고 프론트에 함께 withCredentials: true를 사용 불가
+                .allowedOrigins("*") // 모든 출처 허용안된다고 프론트에 함께 withCredentials: true를 사용 불가
                 .allowedMethods("*") // 모든 HTTP 메서드 허용
                 .allowedHeaders("*") // 모든 헤더 허용
-                .allowCredentials(true) // 인증정보를 허용하지 않음
+                //.allowCredentials(true) // 인증정보를 허용하지 않음
                 .maxAge(3600); // 캐싱 시간 (초)
         }
     }
