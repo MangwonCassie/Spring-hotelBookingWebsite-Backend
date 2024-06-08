@@ -74,7 +74,8 @@ public class SecurityConfig implements WebMvcConfigurer {
                 "https://river-hotel-91f9caaa3277.herokuapp.com/"
         ));
         config.setAllowedMethods(Arrays.asList("*"));
-        config.setAllowedHeaders(Arrays.asList("*"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
         config.setMaxAge(6000L);
         source.registerCorsConfiguration("/**", config);
         return source;
