@@ -65,11 +65,12 @@ public class SecurityConfig implements WebMvcConfigurer {
                         exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                         .requestMatchers("/api/**", "/rooms/**", "/bookings/**", "/auth/**", "/login", "/users", "/bookings")
                         .permitAll()
                         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                         .requestMatchers("/roles/**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                        .anyRequest().authenticated() //나머지 api는 전부 인증 필요
                 );
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
