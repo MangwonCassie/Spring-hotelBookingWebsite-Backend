@@ -35,7 +35,6 @@ public class SecurityConfig implements WebMvcConfigurer {
     private final HotelUserDetailsService userDetailsService;
     private final JwtAuthEntryPoint jwtAuthEntryPoint;
 
-
     @Bean
     public AuthTokenFilter authenticationTokenFilter() {
         return new AuthTokenFilter();
@@ -60,56 +59,21 @@ public class SecurityConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList(
-                "http://127.0.0.1:5173",
-                "https://spring-hotel-booking-website-front.vercel.app",
-                "https://spring-hotel-booking-website-front.vercel.app/",
-                "https://spring-hotel-booking-website-front-ah6ujo8mv-yeoouls-projects.vercel.app/",
-                "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app",
-                "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/",
-                "https://river-hotel-91f9caaa3277.herokuapp.com/"
-        ));
-        config.setAllowedMethods(Arrays.asList("*"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-        config.setMaxAge(6000L);
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
-
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors(cors -> cors.configurationSource(corsConfigurationSource())); // CORS 설정 추가
         http.csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(
                         exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/api/**", "/rooms/**", "/bookings/**", "/auth/**", "/login", "/users", "/bookings")
+                        .requestMatchers("/api/**", "/rooms/**", "/bookings/**", "/auth/**", "/login", "/users", "/bookings")
                         .permitAll()
                         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                         .requestMatchers("/roles/**").hasRole("ADMIN")
-                        .anyRequest().authenticated() //모든 요청이 인증되어야 한다는 것을 의미
+                        .anyRequest().authenticated()
                 );
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
-    }
-
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://127.0.0.1:5173", "https://spring-hotel-booking-website-front.vercel.app","https://spring-hotel-booking-website-front.vercel.app/", "https://spring-hotel-booking-website-front-ah6ujo8mv-yeoouls-projects.vercel.app/", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/", "https://river-hotel-91f9caaa3277.herokuapp.com/"  )
-                .allowedMethods("*")
-                .allowedHeaders("*")
-                .allowCredentials(true)
-                .maxAge(6000);
     }
 
 }
