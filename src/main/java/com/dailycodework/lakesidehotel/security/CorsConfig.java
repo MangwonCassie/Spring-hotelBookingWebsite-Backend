@@ -54,7 +54,8 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedOrigins("*") // 모든 출처 허용안된다고 프론트에 함께 withCredentials: true를 사용 불가
                 .allowedMethods("*") // 모든 HTTP 메서드 허용
                 .allowedHeaders("*") // 모든 헤더 허용
-                //.allowCredentials(true) // 인증정보를 허용하지 않음
+                .exposedHeaders("Authorization") // 클라이언트에 노출할 수 있는 헤더
+                .allowCredentials(true) // 인증정보를 허용하지 않음
                 .maxAge(3600); // 캐싱 시간 (초)
         }
     }
