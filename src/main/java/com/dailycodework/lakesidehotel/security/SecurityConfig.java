@@ -83,4 +83,16 @@ public class SecurityConfig implements WebMvcConfigurer {
 
 
 
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.csrf(AbstractHttpConfigurer::disable)
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+//                        .requestMatchers("/**").permitAll() // 모든 요청을 허용
+//                );
+//        return http.build();
+//    }
+
+
 }
