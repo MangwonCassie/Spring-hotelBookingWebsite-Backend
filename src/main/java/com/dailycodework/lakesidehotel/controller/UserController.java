@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final IUserService userService
+    private final IUserService userService;
 
     @CrossOrigin(origins = {"http://localhost:5173", "https://spring-hotel-booking-website-front-9dlbj6olo-yeoouls-projects.vercel.app", "http://127.0.0.1:5173/", "http://127.0.0.1:5173", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app","https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/", "https://spring-hotel-booking-website-front.vercel.app"})
     @GetMapping("/all")
