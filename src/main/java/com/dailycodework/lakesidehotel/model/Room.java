@@ -42,4 +42,9 @@ public class Room {
         String bookingCode = RandomStringUtils.randomNumeric(10);
         booking.setBookingConfirmationCode(bookingCode);
     }
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hotelId")
+    private Hotel hotel;
 }

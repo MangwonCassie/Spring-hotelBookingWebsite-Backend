@@ -27,11 +27,9 @@ public class BookedRoom {
     @Column(name = "check_out")
     private LocalDate checkOutDate;
 
-    @Column(name = "guest_fullName")
-    private String guestFullName; 
-
-    @Column(name = "guest_email")
-    private String guestEmail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "guest_id")
+    private User guest; // User 전체가져옴
 
     @Column(name = "adults")
     private int NumOfAdults;

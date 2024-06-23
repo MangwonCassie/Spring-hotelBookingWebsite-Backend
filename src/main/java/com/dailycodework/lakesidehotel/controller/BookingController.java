@@ -93,8 +93,8 @@ public class BookingController {
                 theRoom.getRoomPrice());//photo 필요 x
         return new BookingResponse(
                 booking.getBookingId(), booking.getCheckInDate(),
-                booking.getCheckOutDate(),booking.getGuestFullName(),
-                booking.getGuestEmail(), booking.getNumOfAdults(),
+                booking.getCheckOutDate(),booking.getGuest().getFirstName(),
+                booking.getGuest().getEmail(), booking.getNumOfAdults(),
                 booking.getNumOfChildren(), booking.getTotalNumOfGuest(),
                 booking.getBookingConfirmationCode(), room);
     }
