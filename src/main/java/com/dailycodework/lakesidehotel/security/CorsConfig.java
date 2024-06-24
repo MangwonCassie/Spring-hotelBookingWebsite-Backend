@@ -51,7 +51,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:9192", "https://river-hotel-91f9caaa3277.herokuapp.com") // 모든 출처 허용안된다고 프론트에 함께 withCredentials: true를 사용 불가
+                .allowedOrigins("http://localhost:9192", "https://river-hotel-91f9caaa3277.herokuapp.com", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app") // 모든 출처 허용안된다고 프론트에 함께 withCredentials: true를 사용 불가
                 .allowedMethods("*") // 모든 HTTP 메서드 허용
                 .allowedHeaders("*") // 모든 헤더 허용
                 .exposedHeaders("Authorization") // 클라이언트에 노출할 수 있는 헤더
