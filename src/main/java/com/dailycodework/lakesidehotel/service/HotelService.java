@@ -22,4 +22,10 @@ public class HotelService implements IHotelService {
        hotel.setPhone(phone);
         return hotelRepository.save(hotel);
     }
+
+    @Override
+    public Hotel addNewHotel(Hotel hotel) {
+        return null;
+    }
+
 }
