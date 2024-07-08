@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class HotelService implements IHotelService {
 
-    private final IHotelService iHotelService;
-
     private final HotelRepository hotelRepository;
 
     @Override
