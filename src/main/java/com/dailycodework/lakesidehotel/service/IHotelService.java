@@ -6,5 +6,4 @@ public interface IHotelService {
 
     Hotel addNewHotel(String name, String address, String kakaoId, String phone);
 
-    Hotel addNewHotel(Hotel hotel);
 }

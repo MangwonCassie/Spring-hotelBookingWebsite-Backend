@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/hotels")
@@ -15,10 +17,18 @@ public class HotelController {
 
     @CrossOrigin(origins = {"https://river-hotel-91f9caaa3277.herokuapp.com","https://spring-hotel-booking-website-front-9dlbj6olo-yeoouls-projects.vercel.app", "http://localhost:5173/", "http://127.0.0.1:5173/", "http://127.0.0.1:5173", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app","https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/", "https://spring-hotel-booking-website-front.vercel.app"})
     @PostMapping("/add")
-    public ResponseEntity<Hotel> createHotel(@RequestBody Hotel hotel) {
+    public ResponseEntity<Hotel> createHotel(@RequestBody Map<String, Object> hotelData) {
         // Hotel 객체를 저장하는 서비스 호출
-        Hotel savedHotel = hotelService.addNewHotel(hotel);
-        return ResponseEntity.ok(savedHotel);
+        // 필요한 필드 추출
+        String name = (String) hotelData.get("place_name");
+        String address = (String) hotelData.get("road_address_name");
+        String kakaoId = (String) hotelData.get("id");
+        String phone = (String) hotelData.get("phone");
+
+        // Hotel 객체 생성 및 저장
+        Hotel hotel = hotelService.addNewHotel(name, address, kakaoId, phone);
+
+        return ResponseEntity.ok(hotel);
     }
 
 }
