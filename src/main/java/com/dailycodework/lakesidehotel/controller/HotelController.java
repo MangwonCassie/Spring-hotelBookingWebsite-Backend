@@ -20,13 +20,13 @@ public class HotelController {
     public ResponseEntity<Hotel> createHotel(@RequestBody Map<String, Object> hotelData) {
         // Hotel 객체를 저장하는 서비스 호출
         // 필요한 필드 추출
-        String name = (String) hotelData.get("name");
         String address = (String) hotelData.get("address");
         String kakaoId = (String) hotelData.get("kakaoId");
+        String name = (String) hotelData.get("name");
         String phone = (String) hotelData.get("phone");
 
         // Hotel 객체 생성 및 저장
-        Hotel hotel = hotelService.addNewHotel(name, address, kakaoId, phone);
+        Hotel hotel = hotelService.addNewHotel( address,kakaoId, name, phone );
 
         return ResponseEntity.ok(hotel);
     }
