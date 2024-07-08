@@ -16,15 +16,16 @@ public class Hotel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("hotel_id")
     private Long hotelId;
 
-    @JsonProperty("place_name")
+    @JsonProperty("name")
     private String name;
 
-    @JsonProperty("address_name")
+    @JsonProperty("address")
     private String address;
 
-    @JsonProperty("id")
+    @JsonProperty("kakaoId") // DB의 컬럼명과 매칭
     private String kakaoId;
 
     @JsonProperty("phone")
