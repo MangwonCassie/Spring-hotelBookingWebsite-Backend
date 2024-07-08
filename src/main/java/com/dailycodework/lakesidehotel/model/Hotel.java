@@ -21,10 +21,10 @@ public class Hotel {
     @JsonProperty("place_name")
     private String name;
 
-    @JsonProperty("road_address_name")
+    @JsonProperty("address_name")
     private String address;
 
-    @JsonProperty("kakaoId")
+    @JsonProperty("id")
     private String kakaoId;
 
     @JsonProperty("phone")
