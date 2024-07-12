@@ -25,8 +25,11 @@ public class HotelController {
         String name = (String) hotelData.get("name");
         String phone = (String) hotelData.get("phone");
 
+        // 간단한 콘솔 출력
+        System.out.println("Received hotel data - address: " + address + ", kakaoId: " + kakaoId + ", name: " + name + ", phone: " + phone);
+
         // Hotel 객체 생성 및 저장
-        Hotel hotel = hotelService.addNewHotel( address,kakaoId, name, phone );
+        Hotel hotel = hotelService.addNewHotel( address,kakaoId, name, phone);
 
         return ResponseEntity.ok(hotel);
     }

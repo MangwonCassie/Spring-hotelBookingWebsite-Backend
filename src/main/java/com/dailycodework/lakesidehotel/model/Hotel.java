@@ -19,14 +19,14 @@ public class Hotel {
     @JsonProperty("hotel_id")
     private Long hotelId;
 
-    @JsonProperty("name")
-    private String name;
-
     @JsonProperty("address")
     private String address;
 
-    @JsonProperty("kakaoId") // DB의 컬럼명과 매칭
+    @JsonProperty("kakaoId") // 프론트 key값과 일치
     private String kakaoId;
+
+    @JsonProperty("name")
+    private String name;
 
     @JsonProperty("phone")
     private String phone;
