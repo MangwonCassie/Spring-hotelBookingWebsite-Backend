@@ -225,6 +225,14 @@ spring.datasource.username=test
 spring.datasource.password=*********
 ```
 
+![heroku 설정화면](https://github.com/user-attachments/assets/a08361a4-daf7-4463-ad00-07c7921c87e3)
+
+-비밀번호까지 다 설정해야 연결됨 (위에서 빠진 vars없는지 꼼꼼히 확인할 것)
+
+EC2에 배포한 MYSQL HEROKU CLEARDB ADDON의(MYSQL 지원) 설치하고 연결하는 과정 정리<br>
+
+
+
 <br>
 기타 정리 사항<br>
 - csrf.disable() rest api에서는 CSRF보안이 필요없기 때문에 비활성화하는 로직입니다. CSRF는 Cross Site Request Forgery의 줄임말로 사이트간 요청 위조를 의미합니다. <br>
