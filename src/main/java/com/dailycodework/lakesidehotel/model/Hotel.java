@@ -31,7 +31,7 @@ public class Hotel {
     @JsonProperty("phone")
     private String phone;
 
-    @OneToMany(mappedBy="hotel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Room> rooms;
+//    @OneToMany(mappedBy="hotel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Room> rooms;
 
 }

@@ -44,7 +44,7 @@ public class Room {
     }
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hotelId")
-    private Hotel hotel;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "hotelId")
+//    private Hotel hotel;
 }
