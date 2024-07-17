@@ -8,8 +8,6 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 
-import java.time.LocalDate;
-
 @Entity
 @Getter
 @Setter
@@ -32,10 +30,10 @@ public class BookedRoom {
     private User guest; // User 전체가져옴
 
     @Column(name = "adults")
-    private int NumOfAdults;
+    private int numOfAdults;
 
     @Column(name = "children")
-    private int NumOfChildren;
+    private int numOfChildren;
 
     @Column(name = "total_guest")
     private int totalNumOfGuest;
@@ -54,18 +52,17 @@ public class BookedRoom {
     private Room room;
 
     public void calculateTotalNumberOfGuest(){
-        this.totalNumOfGuest = this.NumOfAdults + NumOfChildren;
+        this.totalNumOfGuest = this.numOfAdults + numOfChildren;
     }
 
     public void setNumOfAdults(int numOfAdults) {
-        NumOfAdults = numOfAdults;
-        this.totalNumOfGuest = this.NumOfAdults + this.NumOfChildren; //클래스 내부 값 찾아서 매개변수 필요x
+        this.numOfAdults = numOfAdults;
+        calculateTotalNumberOfGuest(); //클래스 내부 값 찾아서 매개변수 필요x
     }
 
 
     public void setNumOfChildren(int numOfChildren) {
-        NumOfChildren = numOfChildren;
-        this.NumOfChildren = numOfChildren;
+        this.numOfChildren = numOfChildren;
         calculateTotalNumberOfGuest();
     }
 
