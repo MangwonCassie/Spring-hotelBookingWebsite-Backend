@@ -44,6 +44,8 @@ public class BookingController {
     @PostMapping("/room/{roomId}/booking")
     public ResponseEntity<?> saveBooking(@PathVariable Long roomId,
                                          @RequestBody BookedRoom bookingRequest){
+
+        System.out.println("Received booking request (확인중): " + bookingRequest);
         try{
             String confirmationCode = bookingService.saveBooking(roomId, bookingRequest);
             return ResponseEntity.ok(
