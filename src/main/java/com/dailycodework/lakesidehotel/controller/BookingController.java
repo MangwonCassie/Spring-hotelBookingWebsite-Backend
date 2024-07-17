@@ -101,6 +101,6 @@ public class BookingController {
                 booking.getBookingConfirmationCode(), room);
 
         //      booking.getCheckOutDate(),booking.getGuest().getFirstName(),
-        //                booking.getGuest().getEmail(), booking.getNumOfAdults(),
+        //                booking.getGuest().getEmail(), booking.getNumOfAdults(), 이걸로 못 가져와 400에러임.
     }
 }

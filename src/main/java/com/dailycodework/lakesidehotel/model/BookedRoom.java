@@ -26,10 +26,10 @@ public class BookedRoom {
     private LocalDate checkOutDate;
 
 //    //별도로 나중에 추가한 것......
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "guest_id")
-//    private User guest; // User 전체가져옴
-//    //Hotel이랑 연결되어있는 것 같음
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "guest_id")
+    private User guest; // User 전체가져옴
+    //Hotel이랑 연결되어있는 것 같음
 
 
     @Column(name = "guest_email")
