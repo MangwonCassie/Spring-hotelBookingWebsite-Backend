@@ -9,6 +9,8 @@ import com.dailycodework.lakesidehotel.response.RoomResponse;
 import com.dailycodework.lakesidehotel.service.IBookingService;
 import com.dailycodework.lakesidehotel.service.IRoomService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -25,6 +27,7 @@ import java.util.List;
 public class BookingController {
     private final IBookingService bookingService;
     private final IRoomService roomService;
+    private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
 
     @CrossOrigin(origins = {"https://spring-hotel-booking-website-front-9dlbj6olo-yeoouls-projects.vercel.app", "http://localhost:5173/", "http://127.0.0.1:5173/", "http://127.0.0.1:5173", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app","https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/", "https://spring-hotel-booking-website-front.vercel.app"})
     @GetMapping("/all-bookings")
@@ -44,6 +47,8 @@ public class BookingController {
     @PostMapping("/room/{roomId}/booking")
     public ResponseEntity<?> saveBooking(@PathVariable Long roomId,
                                          @RequestBody BookedRoom bookingRequest){
+
+        logger.info("Booking request received: {}", bookingRequest); // 여기서 로그 찍기
 
         System.out.println("Received booking request (확인중): " + bookingRequest);
         try{
