@@ -48,6 +48,10 @@ public class BookingController {
     public ResponseEntity<?> saveBooking(@PathVariable Long roomId,
                                          @RequestBody BookedRoom bookingRequest){
 
+        // 손님 수 계산
+        bookingRequest.setNumOfAdults(bookingRequest.getNumOfAdults());
+        bookingRequest.setNumOfChildren(bookingRequest.getNumOfChildren());
+
         logger.info("Booking request received: {}", bookingRequest); // 여기서 로그 찍기
 
         System.out.println("Received booking request (확인중): " + bookingRequest);
