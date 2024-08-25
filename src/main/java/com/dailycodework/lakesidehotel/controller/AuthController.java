@@ -11,6 +11,8 @@ import com.dailycodework.lakesidehotel.security.user.HotelUserDetails;
 import com.dailycodework.lakesidehotel.service.IUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +30,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     private final IUserService userService;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
@@ -99,6 +102,13 @@ public class AuthController {
                     .stream()
                     .map(Role::getName)
                     .toList();
+
+            // 콘솔에 로그 출력
+            logger.info("KakaoUser Info: {}", kakaoUser);
+            logger.info("User Info: {}", user);
+            logger.info("Generated JWT: {}", jwt);
+
+
             return ResponseEntity.ok(new JwtResponse(
                     user.getId(),
                     user.getEmail(),
