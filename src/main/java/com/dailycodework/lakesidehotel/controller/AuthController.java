@@ -13,22 +13,36 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
+
+    @Value("${kakao.client-id}")
+    private String clientId;
+
+    @Value("${kakao.client-secret}")
+    private String clientSecret;
+
+    @Value("${kakao.redirect-uri}")
+    private String redirectUri;
+
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     private final IUserService userService;
@@ -72,10 +86,31 @@ public class AuthController {
 
     @CrossOrigin(origins = {"https://spring-hotel-booking-website-front.vercel.app", "http://localhost:5173/"})
     @PostMapping("/login/kakao")
-    public ResponseEntity<?> kakaoLogin(@RequestParam String token){
+    public ResponseEntity<?> kakaoLogin(@RequestParam("token") String code){
         try{
-            // 1. Kakao API를 사용해 사용자 정보 가져오기
-            KakaoUser kakaoUser = userService.getKakaoUserInfo(token);
+
+            // 1. 인가 코드를 사용해 카카오에서 액세스 토큰 요청
+            String tokenUrl = "https://kauth.kakao.com/oauth/token";
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("grant_type", "authorization_code");
+            params.add("client_id", clientId);
+            params.add("redirect_uri", redirectUri);
+            params.add("code", code);
+            params.add("client_secret", clientSecret);
+
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<Map> response = restTemplate.postForEntity(tokenUrl, request, Map.class);
+
+            // 2. 액세스 토큰을 추출
+            String accessToken = response.getBody().get("access_token").toString();
+
+
+            // 3. 액세스 토큰을 사용해 사용자 정보 요청
+            KakaoUser kakaoUser = userService.getKakaoUserInfo(accessToken);
 
             // 사용자 이메일을 통해 기존 사용자 확인 및 로그인 처리
             Optional<User> optionalUser = userService.findByEmail(kakaoUser.getEmail());
