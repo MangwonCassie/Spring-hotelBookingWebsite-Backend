@@ -1,6 +1,7 @@
 package com.dailycodework.lakesidehotel.controller;
 
 import com.dailycodework.lakesidehotel.exception.UserAlreadyExistsException;
+import com.dailycodework.lakesidehotel.model.KakaoLoginRequest;
 import com.dailycodework.lakesidehotel.model.KakaoUser;
 import com.dailycodework.lakesidehotel.model.Role;
 import com.dailycodework.lakesidehotel.model.User;
@@ -23,6 +24,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -86,8 +88,10 @@ public class AuthController {
 
     @CrossOrigin(origins = {"https://spring-hotel-booking-website-front.vercel.app", "http://localhost:5173/"})
     @PostMapping("/login/kakao")
-    public ResponseEntity<?> kakaoLogin(@RequestParam("token") String code){
+    public ResponseEntity<?> kakaoLogin(@RequestBody KakaoLoginRequest kakaoLoginRequest){
         try{
+
+            String code = kakaoLoginRequest.getToken();
 
             // 1. 인가 코드를 사용해 카카오에서 액세스 토큰 요청
             String tokenUrl = "https://kauth.kakao.com/oauth/token";
@@ -150,8 +154,9 @@ public class AuthController {
                     jwt,
                     roles
             ));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Kakao login failed.");
+        } catch (RestClientException e) {
+            logger.error("Failed to retrieve access token from Kakao", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to retrieve access token.");
         }
         }
     }
