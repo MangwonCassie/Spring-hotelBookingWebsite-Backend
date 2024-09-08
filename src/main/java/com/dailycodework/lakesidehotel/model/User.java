@@ -1,9 +1,7 @@
 package com.dailycodework.lakesidehotel.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ManyToAny;
 
 import java.util.Collection;
@@ -14,6 +12,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
 
     @Id
@@ -23,6 +23,10 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+
+    private String profileUrl; // 카카오 프로필 이미지 URL
+    private String loginType;  // "KAKAO", "GOOGLE" 등 로그인 유형 구분
+    private boolean useAble;   // 계정 활성 상태
 
 //    @OneToMany(mappedBy="guest", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private List<BookedRoom> bookings;
