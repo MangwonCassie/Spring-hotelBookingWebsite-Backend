@@ -66,4 +66,20 @@ public class JwtUtils {
                 .build()
                 .parseClaimsJws(token).getBody().getSubject();
     }
+
+    public String generateRefreshTokenForUser(Authentication authentication) {
+        HotelUserDetails userPrinciple = (HotelUserDetails) authentication.getPrincipal(); // casting
+        List<String> roles = userPrinciple.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
+
+        // Refresh Token의 만료 시간을 설정 (예: 3일)
+        long refreshTokenExpirationMs = 3 * 24 * 60 * 60 * 1000; // 3일 in milliseconds
+
+        return Jwts.builder()
+                .setSubject(userPrinciple.getUsername())
+                .claim("roles", roles)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + refreshTokenExpirationMs))
+                .signWith(key(), SignatureAlgorithm.HS256)
+                .compact();
+    }
 }

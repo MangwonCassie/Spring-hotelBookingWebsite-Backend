@@ -97,8 +97,9 @@ public class AuthServiceImpl implements AuthService{
             String accessToken = (String) response.getBody().get("access_token");
 
             // 유저 정보 가져오기
-            RequestAuthDto requestAuthDto = getKakaoUserInfo(accessToken);
-            if (requestAuthDto == null) {
+            User user = getKakaoUserInfo(accessToken);
+
+            if (user == null) {
                 return ResponseEntity.status(500).body("Failed to retrieve user information");
             }
 

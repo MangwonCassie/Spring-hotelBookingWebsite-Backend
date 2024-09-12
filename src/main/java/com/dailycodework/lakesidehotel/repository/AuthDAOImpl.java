@@ -49,7 +49,8 @@ public class AuthDAOImpl implements AuthDAO {
 
                 // 토큰 생성
                 String accessToken = jwtUtils.generateJwtTokenForUser(authentication);
-                String refreshToken = jwtUtils.generateJwtTokenForUser(authentication); // Refresh 토큰도 필요하면 따로 관리하세요.
+                String refreshToken = jwtUtils.generateRefreshTokenForUser(authentication); // Refresh Token 따로 관리
+
 
                 // 직접 ResponseEntity로 응답 반환
                 return ResponseEntity.status(HttpStatus.OK)
@@ -73,11 +74,11 @@ public class AuthDAOImpl implements AuthDAO {
 
     @Override
     public boolean checkUserExist(String email, String loginType) {
-        return false;
+        return userRepository.findByEmailAndLoginType(email, loginType).isPresent();
     }
 
     @Override
     public void saveUser(User user) {
-
+        userRepository.save(user);
     }
 }
