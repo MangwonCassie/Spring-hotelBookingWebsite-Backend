@@ -11,22 +11,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
 
-@Component
+@Service
 public class AuthDAOImpl implements AuthDAO {
 
-    @Autowired
     private final UserRepository userRepository;
 
-    @Autowired
     private final JwtUtils jwtUtils;
 
-    @Autowired
     private final UserService userService; // userService 주입
 
     public AuthDAOImpl(UserRepository userRepository, JwtUtils jwtUtils, UserService userService) {
