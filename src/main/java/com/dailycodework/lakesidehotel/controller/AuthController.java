@@ -21,6 +21,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -42,7 +43,6 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     private final AuthService authService;
-
 
 
     @CrossOrigin(origins = {"https://spring-hotel-booking-website-front-9dlbj6olo-yeoouls-projects.vercel.app", "http://localhost:5173/", "http://127.0.0.1:5173/", "http://127.0.0.1:5173", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app", "https://spring-hotel-booking-website-front-git-master-yeoouls-projects.vercel.app/", "https://spring-hotel-booking-website-front.vercel.app"})
@@ -83,9 +83,32 @@ public class AuthController {
     @PostMapping("/login/kakao")
     public ResponseEntity<?> kakaoLogin(@RequestBody KakaoLoginRequest kakaoLoginRequest) {
         // 카카오 소셜 로그인 시 AuthService를 호출하여 처리
-        return authService.signIn(kakaoLoginRequest.getToken(), "kakao");
-    }
+        ResponseEntity<?> response = authService.signIn(kakaoLoginRequest.getToken(), "kakao");
 
+        // 사용자 정보를 가져옴 (유효성 검사를 포함하여 처리)
+        if (response.getBody() instanceof User user) {
+            // Authentication 객체 생성
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), null, List.of(new SimpleGrantedAuthority("ROLE_USER"))); // 권한을 설정해야 함
+
+            // JWT 생성
+            String jwt = jwtUtils.generateJwtTokenForUser(authentication);
+
+            HotelUserDetails userDetails = (HotelUserDetails) authentication.getPrincipal();
+            List<String> roles = userDetails.getAuthorities()
+                    .stream()
+                    .map(GrantedAuthority::getAuthority).toList();
+
+            // JWT와 사용자 정보 반환
+            return ResponseEntity.ok(new JwtResponse(
+                    userDetails.getId(),
+                    userDetails.getEmail(),
+                    jwt,
+                    roles));
+        }
+
+        // 로그인 실패 처리
+        return ResponseEntity.status(500).body("Login failed");
+    }
 }
 
 
